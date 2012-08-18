@@ -23,6 +23,29 @@ else
   RLWRAP=yes
 fi
 
+#install OpenCV
+OpenCV_URL="http://downloads.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.0/OpenCV-2.4.0.tar.bz2?r=&ts=1345295939&use_mirror=aarnet"
+OpenCV_PATH="$CACHE_DIR/OpenCV-2.4.0.tar.bz2"
+
+if [ ! -r "$OpenCV_PATH" ]; then
+echo "-----> Installing OpenCV"
+echo "       Downloading: OpenCV-2.4.0.tar.bz2"
+mkdir -p $(dirname $OpenCV_PATH)
+curl --silent --show-error --max-time 120 -L -o $OpenCV_PATH $OpenCV_URL
+else
+  echo "-----> Using cached Leiningen OpenCV"
+fi
+
+mkdir -p "$BUILD_DIR/.OpenCV"
+cp "$OpenCV_PATH" "$BUILD_DIR/.OpenCV/OpenCV-2.4.0.tar.bz2"
+
+cd "$BUILD_DIR/.OpenCV"
+tar -xzvf OpenCV-2.4.0.tar.bz2
+
+cmake .
+
+make
+
 # install leiningen jar
 LEIN_JAR_URL="https://heroku-buildpack-clojure.s3.amazonaws.com/leiningen-$LEIN_VERSION-standalone.jar"
 LEIN_JAR_PATH="$CACHE_DIR/leiningen-$LEIN_VERSION-standalone.jar"
