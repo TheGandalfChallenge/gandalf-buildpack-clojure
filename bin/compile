@@ -44,6 +44,7 @@ cp "$cmake_PATH" "$BUILD_DIR/.cmake/cmake-2.8.6.tar.gz"
 cd "$BUILD_DIR/.cmake"
 tar zxf cmake-2.8.6.tar.gz
 
+./bootstrap
 make
 make install 
 
