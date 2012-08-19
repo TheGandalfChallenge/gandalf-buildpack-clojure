@@ -32,6 +32,7 @@ echo "-----> Installing OpenCV"
 echo "       Downloading: OpenCV-2.4.0.tar.bz2"
 mkdir -p $(dirname $OpenCV_PATH)
 curl --silent --show-error --max-time 120 -L -o $OpenCV_PATH $OpenCV_URL
+echo "       Download Compleat"
 else
   echo "-----> Using cached Leiningen OpenCV"
 fi
@@ -40,7 +41,7 @@ mkdir -p "$BUILD_DIR/.OpenCV"
 cp "$OpenCV_PATH" "$BUILD_DIR/.OpenCV/OpenCV-2.4.0.tar.bz2"
 
 cd "$BUILD_DIR/.OpenCV"
-tar -xzvf OpenCV-2.4.0.tar.bz2
+tar xvjf OpenCV-2.4.0.tar.bz2
 
 cmake .
 
