@@ -32,7 +32,7 @@ if [ ! -r "$cmake_PATH" ]; then
 echo "-----> Installing cmake"
 echo "       Downloading: cmake-2.8.6.tar.gz2"
 mkdir -p $(dirname $cmake_PATH)
-curl --silent --show-error --max-time 120 -L -o $cmake_PATH $cmake_URL
+curl --show-error --max-time 120 -L -o $cmake_PATH $cmake_URL
 echo "       Download Compleat"
 else
   echo "-----> Using cached cmake"
@@ -56,7 +56,7 @@ if [ ! -r "$OpenCV_PATH" ]; then
 echo "-----> Installing OpenCV"
 echo "       Downloading: OpenCV-2.4.0.tar.bz2"
 mkdir -p $(dirname $OpenCV_PATH)
-curl --silent --show-error --max-time 120 -L -o $OpenCV_PATH $OpenCV_URL
+curl --show-error --max-time 120 -L -o $OpenCV_PATH $OpenCV_URL
 echo "       Download Compleat"
 else
   echo "-----> Using cached OpenCV"
