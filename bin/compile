@@ -46,8 +46,11 @@ cp "$cmake_PATH" "$BUILD_DIR/.cmake/cmake-2.8.6.tar.gz"
 echo "changing directory to $BUILD_DIR/.cmake"
 cd "$BUILD_DIR/.cmake"
 
-ls
+echo "extracting cmake-2.8.6.tar.gz"
 tar zxf cmake-2.8.6.tar.gz
+echo "changing directory to cmake-2.8.6"
+cd cmake-2.8.6
+
 ls
 
 ./bootstrap
