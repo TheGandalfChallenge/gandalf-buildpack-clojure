@@ -62,6 +62,9 @@ ls
 make | indent
 make install | indent
 
+PATH=${target}/bin:$PATH
+cd ..
+
 #install OpenCV
 OpenCV_URL="http://downloads.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.0/OpenCV-2.4.0.tar.bz2?r=&ts=1345295939&use_mirror=aarnet"
 OpenCV_PATH="$CACHE_DIR/OpenCV-2.4.0.tar.bz2"
@@ -82,9 +85,9 @@ cp "$OpenCV_PATH" "$BUILD_DIR/.OpenCV/OpenCV-2.4.0.tar.bz2"
 cd "$BUILD_DIR/.OpenCV"
 tar xvjf OpenCV-2.4.0.tar.bz2
 
-$target/cmake .
+cmake -DCMAKE_INSTALL_PREFIX=${target} -DCMAKE_FIND_ROOT_PATH=${target} . | indent
 
-make
+make | indent
 
 # install leiningen jar
 LEIN_JAR_URL="https://heroku-buildpack-clojure.s3.amazonaws.com/leiningen-$LEIN_VERSION-standalone.jar"
