@@ -31,7 +31,7 @@ fi
 
 cmake_URL="http://www.cmake.org/files/v2.8/cmake-2.8.6.tar.gz"
 cmake_PATH="$CACHE_DIR/cmake-2.8.6.tar.gz"
-target=/app/.local
+target=/app/lib
 
 if [ ! -r "$cmake_PATH" ]; then
 echo "-----> Installing cmake"
