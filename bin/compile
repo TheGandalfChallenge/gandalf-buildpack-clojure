@@ -82,7 +82,7 @@ cp "$OpenCV_PATH" "$BUILD_DIR/.OpenCV/OpenCV-2.4.0.tar.bz2"
 cd "$BUILD_DIR/.OpenCV"
 tar xvjf OpenCV-2.4.0.tar.bz2
 
-cmake .
+$target/cmake .
 
 make
 
