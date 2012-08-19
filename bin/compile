@@ -4,6 +4,10 @@
 # fail fast
 set -e
 
+indent() {
+  sed -u 's/^/       /'
+}
+
 # parse args
 BUILD_DIR=$1
 CACHE_DIR=$2
@@ -27,6 +31,7 @@ fi
 
 cmake_URL="http://www.cmake.org/files/v2.8/cmake-2.8.6.tar.gz"
 cmake_PATH="$CACHE_DIR/cmake-2.8.6.tar.gz"
+target=/app/.local
 
 if [ ! -r "$cmake_PATH" ]; then
 echo "-----> Installing cmake"
@@ -53,9 +58,9 @@ cd cmake-2.8.6
 
 ls
 
-./bootstrap
-make
-make install 
+./bootstrap --prefix=${target} | indent
+make | indent
+make install | indent
 
 #install OpenCV
 OpenCV_URL="http://downloads.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.0/OpenCV-2.4.0.tar.bz2?r=&ts=1345295939&use_mirror=aarnet"
