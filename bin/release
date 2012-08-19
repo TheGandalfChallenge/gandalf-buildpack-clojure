@@ -4,10 +4,9 @@
 cat <<EOF
 ---
 config_vars:
-  PATH: .lein/bin:/usr/local/bin:/usr/bin:/bin:/app/.local/bin
+  PATH: .lein/bin:/usr/local/bin:/usr/bin:/bin
   JVM_OPTS: -Xmx400m
   LEIN_NO_DEV: yes
-  LD_LIBRARY_PATH: /app/.local/lib
 default_process_types:
   web: lein trampoline run
 EOF
