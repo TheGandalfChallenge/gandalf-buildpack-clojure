@@ -8,25 +8,6 @@ set -e
 BUILD_DIR=$1
 CACHE_DIR=$2
 
-
-cmake_version="2.8.6"
-cmake_url="http://www.cmake.org/files/v2.8/cmake-2.8.6.tar.gz"
-cmake_file="cmake-${cmake_version}.tar.gz"
-cmake_tar_dir="cmake-${cmake_version}"
-target=/app/.local
-
-echo "Compiling cmake v${cmake_version}..." | indent
-#Compile cmake
-curl -s ${cmake_url} > ${cmake_file}
-tar zxf ${cmake_file}
-cd ${cmake_tar_dir}
-./bootstrap --prefix=${target} | indent
-make | indent
-make install | indent
-PATH=${target}/bin:$PATH
-cd ..
-
-
 # Determine Leiningen version
 if [ "$(grep ":min-lein-version \"2" $1/project.clj)" != "" ]; then
   LEIN_VERSION="2.0.0-preview8"
@@ -41,6 +22,30 @@ else
   fi
   RLWRAP=yes
 fi
+
+#install cmake
+
+cmake_URL="http://www.cmake.org/files/v2.8/cmake-2.8.6.tar.gz"
+cmake_PATH="$CACHE_DIR/cmake-2.8.6.tar.gz"
+
+if [ ! -r "$cmake_PATH" ]; then
+echo "-----> Installing cmake"
+echo "       Downloading: cmake-2.8.6.tar.gz2"
+mkdir -p $(dirname $cmake_PATH)
+curl --silent --show-error --max-time 120 -L -o $cmake_PATH $cmake_URL
+echo "       Download Compleat"
+else
+  echo "-----> Using cached cmake"
+fi
+
+mkdir -p "$BUILD_DIR/.cmake"
+cp "$cmake_PATH" "$BUILD_DIR/.cmake/cmake-2.8.6.tar.gz"
+
+cd "$BUILD_DIR/.cmake"
+tar zxf cmake-2.8.6.tar.gz
+
+make
+make install 
 
 #install OpenCV
 OpenCV_URL="http://downloads.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.0/OpenCV-2.4.0.tar.bz2?r=&ts=1345295939&use_mirror=aarnet"
