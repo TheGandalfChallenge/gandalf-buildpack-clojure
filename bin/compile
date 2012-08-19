@@ -38,11 +38,17 @@ else
   echo "-----> Using cached cmake"
 fi
 
+echo "making $BUILD_DIR/.cmake"
 mkdir -p "$BUILD_DIR/.cmake"
+echo "copping $cmake_PATH to  $BUILD_DIR/.cmake/cmake-2.8.6.tar.gz" 
 cp "$cmake_PATH" "$BUILD_DIR/.cmake/cmake-2.8.6.tar.gz"
 
+echo "changing directory to $BUILD_DIR/.cmake"
 cd "$BUILD_DIR/.cmake"
+
+ls
 tar zxf cmake-2.8.6.tar.gz
+ls
 
 ./bootstrap
 make
