@@ -27,67 +27,67 @@ else
   RLWRAP=yes
 fi
 
-#install cmake
+# #install cmake
 
-cmake_URL="http://www.cmake.org/files/v2.8/cmake-2.8.6.tar.gz"
-cmake_PATH="$CACHE_DIR/cmake-2.8.6.tar.gz"
-target=/app/lib
+# cmake_URL="http://www.cmake.org/files/v2.8/cmake-2.8.6.tar.gz"
+# cmake_PATH="$CACHE_DIR/cmake-2.8.6.tar.gz"
+# target=/app/lib
 
-if [ ! -r "$cmake_PATH" ]; then
-echo "-----> Installing cmake"
-echo "       Downloading: cmake-2.8.6.tar.gz2"
-mkdir -p $(dirname $cmake_PATH)
-curl --show-error --max-time 120 -L -o $cmake_PATH $cmake_URL
-echo "       Download Compleat"
-else
-  echo "-----> Using cached cmake"
-fi
+# if [ ! -r "$cmake_PATH" ]; then
+# echo "-----> Installing cmake"
+# echo "       Downloading: cmake-2.8.6.tar.gz2"
+# mkdir -p $(dirname $cmake_PATH)
+# curl --show-error --max-time 120 -L -o $cmake_PATH $cmake_URL
+# echo "       Download Compleat"
+# else
+#   echo "-----> Using cached cmake"
+# fi
 
-echo "making $BUILD_DIR/.cmake"
-mkdir -p "$BUILD_DIR/.cmake"
-echo "copping $cmake_PATH to  $BUILD_DIR/.cmake/cmake-2.8.6.tar.gz" 
-cp "$cmake_PATH" "$BUILD_DIR/.cmake/cmake-2.8.6.tar.gz"
+# echo "making $BUILD_DIR/.cmake"
+# mkdir -p "$BUILD_DIR/.cmake"
+# echo "copping $cmake_PATH to  $BUILD_DIR/.cmake/cmake-2.8.6.tar.gz" 
+# cp "$cmake_PATH" "$BUILD_DIR/.cmake/cmake-2.8.6.tar.gz"
 
-echo "changing directory to $BUILD_DIR/.cmake"
-cd "$BUILD_DIR/.cmake"
+# echo "changing directory to $BUILD_DIR/.cmake"
+# cd "$BUILD_DIR/.cmake"
 
-echo "extracting cmake-2.8.6.tar.gz"
-tar zxf cmake-2.8.6.tar.gz
-echo "changing directory to cmake-2.8.6"
-cd cmake-2.8.6
+# echo "extracting cmake-2.8.6.tar.gz"
+# tar zxf cmake-2.8.6.tar.gz
+# echo "changing directory to cmake-2.8.6"
+# cd cmake-2.8.6
 
-ls
+# ls
 
-./bootstrap --prefix=${target} | indent
-make | indent
-make install | indent
+# ./bootstrap --prefix=${target} | indent
+# make | indent
+# make install | indent
 
-PATH=${target}/bin:$PATH
-cd ..
+# PATH=${target}/bin:$PATH
+# cd ..
 
-#install OpenCV
-OpenCV_URL="http://downloads.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.0/OpenCV-2.4.0.tar.bz2?r=&ts=1345295939&use_mirror=aarnet"
-OpenCV_PATH="$CACHE_DIR/OpenCV-2.4.0.tar.bz2"
+# #install OpenCV
+# OpenCV_URL="http://downloads.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.0/OpenCV-2.4.0.tar.bz2?r=&ts=1345295939&use_mirror=aarnet"
+# OpenCV_PATH="$CACHE_DIR/OpenCV-2.4.0.tar.bz2"
 
-if [ ! -r "$OpenCV_PATH" ]; then
-echo "-----> Installing OpenCV"
-echo "       Downloading: OpenCV-2.4.0.tar.bz2"
-mkdir -p $(dirname $OpenCV_PATH)
-curl --show-error --max-time 120 -L -o $OpenCV_PATH $OpenCV_URL
-echo "       Download Compleat"
-else
-  echo "-----> Using cached OpenCV"
-fi
+# if [ ! -r "$OpenCV_PATH" ]; then
+# echo "-----> Installing OpenCV"
+# echo "       Downloading: OpenCV-2.4.0.tar.bz2"
+# mkdir -p $(dirname $OpenCV_PATH)
+# curl --show-error --max-time 120 -L -o $OpenCV_PATH $OpenCV_URL
+# echo "       Download Compleat"
+# else
+#   echo "-----> Using cached OpenCV"
+# fi
 
-mkdir -p "$BUILD_DIR/.OpenCV"
-cp "$OpenCV_PATH" "$BUILD_DIR/.OpenCV/OpenCV-2.4.0.tar.bz2"
+# mkdir -p "$BUILD_DIR/.OpenCV"
+# cp "$OpenCV_PATH" "$BUILD_DIR/.OpenCV/OpenCV-2.4.0.tar.bz2"
 
-cd "$BUILD_DIR/.OpenCV"
-tar xvjf OpenCV-2.4.0.tar.bz2
+# cd "$BUILD_DIR/.OpenCV"
+# tar xvjf OpenCV-2.4.0.tar.bz2
 
-cmake -DCMAKE_INSTALL_PREFIX=${target} -DCMAKE_FIND_ROOT_PATH=${target} . | indent
+# cmake -DCMAKE_INSTALL_PREFIX=${target} -DCMAKE_FIND_ROOT_PATH=${target} . | indent
 
-make | indent
+# make | indent
 
 # install leiningen jar
 LEIN_JAR_URL="https://heroku-buildpack-clojure.s3.amazonaws.com/leiningen-$LEIN_VERSION-standalone.jar"
